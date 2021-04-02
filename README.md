@@ -8,7 +8,7 @@ docker run -it -v "$(Get-Location):/documents:" jimurai/docker-asciidoctor-bytes
 
 ## Example
 ```
-asciidoctor -r asciidoctor-diagram ./tmp ./tests/fixtures/sample-with-diagram.adoc
+asciidoctor -r asciidoctor-diagram -D ./tmp ./tests/fixtures/sample-with-diagram.adoc
 ```
 
 ## Build
