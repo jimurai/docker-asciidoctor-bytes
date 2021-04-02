@@ -1,5 +1,7 @@
 # docker-asciidoctor-bytes
- Adds [bytefield-svg](https://github.com/asciidoctor/docker-asciidoctor) and [wavedrom](https://github.com/wavedrom/cli) to the the [Asciidoctor docker image](https://github.com/asciidoctor/docker-asciidoctor).
+ Adds [bytefield-svg](https://github.com/asciidoctor/docker-asciidoctor) and [wavedrom](https://github.com/wavedrom/cli) to the official [Asciidoctor docker image](https://github.com/asciidoctor/docker-asciidoctor).
+
+This has only been tested in Windows 10 Pro using WSL2 and Docker Desktop. If anything looks odd it is probably because I'm using PowerShell without knowning what I'm doing.
 
 ## Run
 ```
