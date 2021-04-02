@@ -1,0 +1,229 @@
+
+= Sample
+
+This is a sample from
+link:https://github.com/asciidoctor/docker-asciidoctor/issues/44#issue-265179207[]
+
+[IMPORTANT]
+====
+Thanks to link:https://github.com/ryosms[]!
+====
+
+[plantuml,sample-diagram,svg]
+----
+class Sample {
+}
+----
+
+== Additional Diagrams
+Below some examples of working additional diagrams.
+
+== Bytefield-svg Example
+.A byte field
+[bytefield]
+----
+(draw-column-headers)
+(draw-box 42)
+(draw-gap "Whee!")
+(draw-bottom)
+----
+
+== Wavedrom Example
+[wavedrom,sample-timing,svg]
+----
+{ signal: [
+  { name: "clk",         wave: "p.....|..." },
+  { name: "Data",        wave: "x.345x|=.x", data: ["head", "body", "tail", "data"] },
+  { name: "Request",     wave: "0.1..0|1.0" },
+  {},
+  { name: "Acknowledge", wave: "1.....|01." }
+]}
+----
+
+== Dita Example
+[ditaa]
+....
+                   +-------------+
+                   | Asciidoctor |-------+
+                   |   diagram   |       |
+                   +-------------+       | PNG out
+                       ^                 |
+                       | ditaa in        |
+                       |                 v
+ +--------+   +--------+----+    /---------------\
+ |        | --+ Asciidoctor +--> |               |
+ |  Text  |   +-------------+    |   Beautiful   |
+ |Document|   |   !magic!   |    |    Output     |
+ |     {d}|   |             |    |               |
+ +---+----+   +-------------+    \---------------/
+     :                                   ^
+     |          Lots of work             |
+     +-----------------------------------+
+....
+
+
+== Graphviz ( Digraph)
+[graphviz, dot-example, svg]
+----
+digraph g {
+    a -> b
+    b -> c
+    c -> d
+    d -> a
+}
+----
+
+== Plantuml from external file...
+[plantuml,activity,svg,align="center"]
+----
+include::activity_diagram.txt[]
+----
+
+
+== BlockDiagrams
+ * http://blockdiag.com/en/index.html
+
+
+
+=== Example nwdiag
+You can find a lot of examples here http://blockdiag.com/en/nwdiag/nwdiag-examples.html
+[nwdiag, nwdiag-dmz, svg]
+----
+nwdiag {
+  network dmz {
+      address = "210.x.x.x/24"
+
+      web01 [address = "210.x.x.1"];
+      web02 [address = "210.x.x.2"];
+  }
+  network internal {
+      address = "172.x.x.x/24";
+
+      web01 [address = "172.x.x.1"];
+      web02 [address = "172.x.x.2"];
+      db01;
+      db02;
+  }
+}
+----
+
+=== Exampled blockdiag
+http://blockdiag.com/en/blockdiag/examples.html
+
+[blockdiag, blockdiag-1, svg]
+----
+blockdiag {
+   A -> B -> C -> D;
+   A -> E -> F -> G;
+}
+----
+
+
+=== Multiple Racks
+http://blockdiag.com/en/nwdiag/rackdiag-examples.html
+
+[rackdiag, rackdiag-1, svg]
+----
+rackdiag {
+  // define 1st rack
+  rack {
+    16U;
+
+    // define rack items
+    1: UPS [2U];
+    3: DB Server
+    4: Web Server
+    5: Web Server
+    6: Web Server
+    7: Load Balancer
+    8: L3 Switch
+  }
+
+  // define 2nd rack
+  rack {
+    12U;
+
+    // define rack items
+    1: UPS [2U];
+    3: DB Server
+    4: Web Server
+    5: Web Server
+    6: Web Server
+    7: Load Balancer
+    8: L3 Switch
+  }
+}
+----
+
+=== ERD
+https://github.com/BurntSushi/erd
+
+[erd, erd-1, svg]
+----
+title {label: "nfldb Entity-Relationship diagram (condensed)", size: "20"}
+# Entities
+[player] {bgcolor: "#d0e0d0"}
+  *player_id {label: "varchar, not null"}
+  full_name {label: "varchar, null"}
+  team {label: "varchar, not null"}
+  position {label: "player_pos, not null"}
+  status {label: "player_status, not null"}
+[team] {bgcolor: "#d0e0d0"}
+  *team_id {label: "varchar, not null"}
+  city {label: "varchar, not null"}
+  name {label: "varchar, not null"}
+[game] {bgcolor: "#ececfc"}
+  *gsis_id {label: "gameid, not null"}
+  start_time {label: "utctime, not null"}
+  week {label: "usmallint, not null"}
+  season_year {label: "usmallint, not null"}
+  season_type {label: "season_phase, not null"}
+  finished {label: "boolean, not null"}
+  home_team {label: "varchar, not null"}
+  home_score {label: "usmallint, not null"}
+  away_team {label: "varchar, not null"}
+  away_score {label: "usmallint, not null"}
+[drive] {bgcolor: "#ececfc"}
+  *+gsis_id {label: "gameid, not null"}
+  *drive_id {label: "usmallint, not null"}
+  start_field {label: "field_pos, null"}
+  start_time {label: "game_time, not null"}
+  end_field {label: "field_pos, null"}
+  end_time {label: "game_time, not null"}
+  pos_team {label: "varchar, not null"}
+  pos_time {label: "pos_period, null"}
+[play] {bgcolor: "#ececfc"}
+  *+gsis_id {label: "gameid, not null"}
+  *+drive_id {label: "usmallint, not null"}
+  *play_id {label: "usmallint, not null"}
+  time {label: "game_time, not null"}
+  pos_team {label: "varchar, not null"}
+  yardline {label: "field_pos, null"}
+  down {label: "smallint, null"}
+  yards_to_go {label: "smallint, null"}
+[play_player] {bgcolor: "#ececfc"}
+  *+gsis_id {label: "gameid, not null"}
+  *+drive_id {label: "usmallint, not null"}
+  *+play_id {label: "usmallint, not null"}
+  *+player_id {label: "varchar, not null"}
+  team {label: "varchar, not null"}
+[meta] {bgcolor: "#fcecec"}
+  version {label: "smallint, null"}
+  season_type {label: "season_phase, null"}
+  season_year {label: "usmallint, null"}
+  week {label: "usmallint, null"}
+# Relationships
+player      *--1 team
+game        *--1 team {label: "home"}
+game        *--1 team {label: "away"}
+drive       *--1 team
+play        *--1 team
+play_player *--1 team
+game        1--* drive
+game        1--* play
+game        1--* play_player
+drive       1--* play
+drive       1--* play_player
+play        1--* play_player
+player      1--* play_player
+----
